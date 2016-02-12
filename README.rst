@@ -20,3 +20,5 @@ from ATLAS.
 
 This should build you a numpy wheel with the ATLAS binary packaged inside.  It
 will be in the ``dist`` subdirectory of the numpy source tree.
+
+Built wheels at: http://nipy.bic.berkeley.edu/scipy_installers/atlas_builds
