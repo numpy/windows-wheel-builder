@@ -1,0 +1,31 @@
+#ifndef ATL_INSTINFO_H
+   #define ATL_INSTINFO_H
+
+#define ATL_ARCH "x86SSE264SSE2"
+#define ATL_INSTFLAGS "-1 0 -a 0 -l 1"
+#define ATL_F2CDEFS "-DAdd_ -DF77_INTEGER=int -DStringSunStyle"
+#define ATL_ARCHDEFS "-DATL_OS_WinNT -DATL_ARCH_x86SSE2 -DATL_CPUMHZ=2392 -DGCCWIN -DUseClock -DATL_SSE2 -DATL_SSE1 -DATL_USE64BITS"
+#define ATL_DKCFLAGS "-fomit-frame-pointer -mfpmath=sse -O2 -msse2 -mfpmath=sse -msse2 -m64"
+#define ATL_DKC "/usr/bin/x86_64-pc-cygwin-gcc.exe"
+#define ATL_SKCFLAGS "-fomit-frame-pointer -mfpmath=sse -O2 -msse2 -mfpmath=sse -msse2 -m64"
+#define ATL_SKC "/usr/bin/x86_64-pc-cygwin-gcc.exe"
+#define ATL_DMCFLAGS "-fomit-frame-pointer -mfpmath=sse -O2 -msse2 -mfpmath=sse -msse2 -m64"
+#define ATL_DMC "/usr/bin/x86_64-pc-cygwin-gcc.exe"
+#define ATL_SMCFLAGS "-fomit-frame-pointer -mfpmath=sse -O2 -msse2 -mfpmath=sse -msse2 -m64"
+#define ATL_SMC "/usr/bin/x86_64-pc-cygwin-gcc.exe"
+#define ATL_ICCFLAGS "-DL2SIZE=4194304 -I/cygdrive/d/code/atlas/atlas-3.10.1-build-64-sse2-full-explicit/include -I/cygdrive/d/code/atlas/atlas-3.10.1//include -I/cygdrive/d/code/atlas/atlas-3.10.1//include/contrib -DAdd_ -DF77_INTEGER=int -DStringSunStyle -DATL_OS_WinNT -DATL_ARCH_x86SSE2 -DATL_CPUMHZ=2392 -DGCCWIN -DUseClock -DATL_SSE2 -DATL_SSE1 -DATL_USE64BITS -m64 -DATL_FULL_LAPACK -DATL_NCPU=2 -fomit-frame-pointer -mfpmath=sse -O2 -msse2 -mfpmath=sse -msse2 -m64"
+#define ATL_ICC "/usr/bin/x86_64-pc-cygwin-gcc.exe"
+#define ATL_F77FLAGS "-fomit-frame-pointer -mfpmath=sse -O2 -msse2 -mfpmath=sse -msse2 -m64"
+#define ATL_F77 "/usr/bin/gfortran.exe"
+#define ATL_DKCVERS "x86_64-pc-cygwin-gcc (GCC) 4.9.3"
+#define ATL_SKCVERS "x86_64-pc-cygwin-gcc (GCC) 4.9.3"
+#define ATL_DMCVERS "x86_64-pc-cygwin-gcc (GCC) 4.9.3"
+#define ATL_SMCVERS "x86_64-pc-cygwin-gcc (GCC) 4.9.3"
+#define ATL_ICCVERS "x86_64-pc-cygwin-gcc (GCC) 4.9.3"
+#define ATL_F77VERS "GNU Fortran (GCC) 4.9.3"
+#define ATL_SYSINFO "CYGWIN_NT-6.3 angela 2.4.1(0.293/5/3) 2016-01-24 11:26 x86_64 Cygwin"
+#define ATL_DATE    "Thu, Feb 11, 2016 12:23:38 PM"
+#define ATL_UNAM    "mb312"
+#define ATL_VERS    "3.10.1"
+
+#endif
