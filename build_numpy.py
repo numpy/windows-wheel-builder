@@ -11,7 +11,7 @@ BUILD_STUFF = abspath(dirname(__file__))
 
 LIB_NAME = 'numpy-atlas'
 
-SITE_CFG_TEMPLATE = r"""\
+SITE_CFG_TEMPLATE = r"""
 [atlas]
 include_dirs = {atlas_path}\include
 library_dirs = {atlas_path}\lib
@@ -19,7 +19,7 @@ atlas_libs = {lib_name}
 lapack_libs = {lib_name}
 """
 
-ATLAS_PATH_TEMPLATE = r'{repo_path\atlas-builds\atlas-3.10.1-sse2-{n_bits}'
+ATLAS_PATH_TEMPLATE = r'{repo_path}\atlas-builds\atlas-3.10.1-sse2-{n_bits}'
 
 def main():
     n_bits = sys.argv[1]
@@ -33,7 +33,7 @@ def main():
     check_call(['git', 'clean', '-fxd'])
     check_call(['git', 'reset', '--hard'])
     patch_file = pjoin(BUILD_STUFF, '1.10.4-init.patch')
-    check_call(['git', 'apply', patch_file])
+    check_call(['git', 'apply', '--ignore-whitespace', patch_file])
     atlas_path = ATLAS_PATH_TEMPLATE.format(repo_path=BUILD_STUFF,
                                           n_bits=n_bits)
     with open('site.cfg', 'wt') as fobj:

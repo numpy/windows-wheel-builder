@@ -14,3 +14,7 @@ def main():
         print('Processing', fname)
         with InWheel(fname, fname):
             shutil.copy2(lib_path, pjoin('numpy', 'core'))
+
+
+if __name__ == '__main__':
+    main()
