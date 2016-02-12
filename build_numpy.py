@@ -10,7 +10,10 @@ from subprocess import check_call
 BUILD_STUFF = dirname(__file__)
 
 def main():
-    numpy_path = sys.argv[1]
+    try:
+        numpy_path = sys.argv[1]
+    except IndexError:
+        numpy_path = os.getcwd()
     os.chdir(abspath(numpy_path))
     check_call(['git', 'clean', '-fxd'])
     check_call(['git', 'reset', '--hard'])

@@ -12,7 +12,7 @@ parser = SafeConfigParser()
 if len(parser.read('site.cfg')) == 0:
     raise RuntimeError('Could not read site.cfg file')
 lib_path = parser.get('atlas', 'library_dirs').split(pathsep)
-lib = parser.get('atlas', 'libraries').split(',')
+lib = parser.get('atlas', 'atlas_libs').split(',')
 if len(lib_path + lib) > 2:
     raise RuntimeError('Too many library paths or libraries')
 lib_path = abspath(pjoin(lib_path[0], lib[0] + '.dll'))
