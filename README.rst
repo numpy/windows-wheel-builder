@@ -15,9 +15,12 @@ from ATLAS.
     git clone https://github.com/numpy/numpy.git
     cd numpy
     git checkout v1.10.4
-    python ..\np-wheel-builder\build_numpy.py
+    python ..\np-wheel-builder\build_numpy.py 32
 
 This should build you a numpy wheel with the ATLAS binary packaged inside.  It
-will be in the ``dist`` subdirectory of the numpy source tree.
+will be in the ``dist`` subdirectory of the numpy source tree.  ``32`` is when
+building against a 32-bit Python, use ``64`` otherwise.
 
 Built wheels at: http://nipy.bic.berkeley.edu/scipy_installers/atlas_builds
+
+http://stackoverflow.com/questions/9946322/how-to-generate-an-import-library-lib-file-from-a-dll
