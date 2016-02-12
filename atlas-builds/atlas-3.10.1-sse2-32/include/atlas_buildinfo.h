@@ -1,0 +1,31 @@
+#ifndef ATL_INSTINFO_H
+   #define ATL_INSTINFO_H
+
+#define ATL_ARCH "x86SSE232SSE2"
+#define ATL_INSTFLAGS "-1 0 -a 0 -l 1"
+#define ATL_F2CDEFS "-DAdd_ -DF77_INTEGER=int -DStringSunStyle"
+#define ATL_ARCHDEFS "-DATL_OS_Win64 -DATL_ARCH_x86SSE2 -DATL_CPUMHZ=2392 -DGCCWIN -DUseClock -DATL_SSE2 -DATL_SSE1 -DATL_GAS_x8632"
+#define ATL_DKCFLAGS "-fomit-frame-pointer -mfpmath=sse -O2 -msse2 -mincoming-stack-boundary=2 -mfpmath=sse -msse2 -m32 -mstackrealign"
+#define ATL_DKC "/usr/bin/i686-pc-cygwin-gcc.exe"
+#define ATL_SKCFLAGS "-fomit-frame-pointer -mfpmath=sse -O2 -msse2 -mincoming-stack-boundary=2 -mfpmath=sse -msse2 -m32 -mstackrealign"
+#define ATL_SKC "/usr/bin/i686-pc-cygwin-gcc.exe"
+#define ATL_DMCFLAGS "-fomit-frame-pointer -mfpmath=sse -O2 -msse2 -mincoming-stack-boundary=2 -mfpmath=sse -msse2 -m32 -mstackrealign"
+#define ATL_DMC "/usr/bin/i686-pc-cygwin-gcc.exe"
+#define ATL_SMCFLAGS "-fomit-frame-pointer -mfpmath=sse -O2 -msse2 -mincoming-stack-boundary=2 -mfpmath=sse -msse2 -m32 -mstackrealign"
+#define ATL_SMC "/usr/bin/i686-pc-cygwin-gcc.exe"
+#define ATL_ICCFLAGS "-DL2SIZE=4194304 -I/cygdrive/c/code/atlas/atlas-3.10.1-build-32-sse2-full-explicit/include -I/cygdrive/c/code/atlas/atlas-3.10.1//include -I/cygdrive/c/code/atlas/atlas-3.10.1//include/contrib -DAdd_ -DF77_INTEGER=int -DStringSunStyle -DATL_OS_Win64 -DATL_ARCH_x86SSE2 -DATL_CPUMHZ=2392 -DGCCWIN -DUseClock -DATL_SSE2 -DATL_SSE1 -DATL_GAS_x8632 -m32 -DATL_FULL_LAPACK -DATL_NCPU=2 -fomit-frame-pointer -mfpmath=sse -O2 -msse2 -mincoming-stack-boundary=2 -mfpmath=sse -msse2 -m32 -mstackrealign"
+#define ATL_ICC "/usr/bin/i686-pc-cygwin-gcc.exe"
+#define ATL_F77FLAGS "-fomit-frame-pointer -mfpmath=sse -O2 -msse2 -mincoming-stack-boundary=2 -mfpmath=sse -msse2 -m32"
+#define ATL_F77 "/usr/bin/gfortran.exe"
+#define ATL_DKCVERS "i686-pc-cygwin-gcc (GCC) 4.8.2"
+#define ATL_SKCVERS "i686-pc-cygwin-gcc (GCC) 4.8.2"
+#define ATL_DMCVERS "i686-pc-cygwin-gcc (GCC) 4.8.2"
+#define ATL_SMCVERS "i686-pc-cygwin-gcc (GCC) 4.8.2"
+#define ATL_ICCVERS "i686-pc-cygwin-gcc (GCC) 4.8.2"
+#define ATL_F77VERS "GNU Fortran (GCC) 4.8.2"
+#define ATL_SYSINFO "CYGWIN_NT-6.1-WOW64 angela 1.7.29(0.272/5/3) 2014-04-07 13:44 i686 Cygwin"
+#define ATL_DATE    "Tue May 13 17:49:31 PDT 2014"
+#define ATL_UNAM    "mb312"
+#define ATL_VERS    "3.10.1"
+
+#endif

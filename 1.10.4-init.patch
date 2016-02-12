@@ -1,0 +1,29 @@
+From 8bf59b23b11f7da370e009d78f074a662baa862a Mon Sep 17 00:00:00 2001
+From: Matthew Brett <matthew.brett@gmail.com>
+Date: Thu, 11 Feb 2016 15:08:43 -0800
+Subject: [PATCH] Patch init
+
+---
+ numpy/__init__.py | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/numpy/__init__.py b/numpy/__init__.py
+index d4ef54d..64d59a4 100644
+--- a/numpy/__init__.py
++++ b/numpy/__init__.py
+@@ -188,6 +188,12 @@ else:
+     test = Tester().test
+     bench = Tester().bench
+ 
++    # Allow platform-specific build to intervene in numpy init
++    try:
++        from . import _distributor_init
++    except ImportError:
++        pass
++
+     from . import core
+     from .core import *
+     from . import compat
+-- 
+1.9.2.msysgit.0
+
