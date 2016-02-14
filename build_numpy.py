@@ -6,6 +6,7 @@ import os
 from os.path import abspath, dirname, join as pjoin
 import shutil
 from subprocess import check_call
+from platform import architecture
 
 import patch
 
@@ -23,19 +24,23 @@ lapack_libs = {lib_name}
 
 ATLAS_PATH_TEMPLATE = r'{repo_path}\atlas-builds\atlas-3.10.1-sse2-{n_bits}'
 
+
+def get_bitness():
+    bits, _ = architecture()
+    return '32' if bits == '32bit' else '64' if bits == '64bit' else None
+
+
 def main():
-    n_bits = sys.argv[1]
+    argc = len(sys.argv)
+    numpy_path = sys.argv[1] if argc > 1 else os.getcwd()
+    n_bits = sys.argv[2] if argc > 2 else get_bitness()
     if n_bits not in ('32', '64'):
         raise RuntimeError("Number of bits should be 32 or 64")
-    try:
-        numpy_path = sys.argv[2]
-    except IndexError:
-        numpy_path = os.getcwd()
     os.chdir(abspath(numpy_path))
     check_call(['git', 'clean', '-fxd'])
     check_call(['git', 'reset', '--hard'])
     patch_file = pjoin(BUILD_STUFF, '1.10.4-init.patch')
-    patch_set = patch.from_file(patch_file)
+    patch_set = patch.fromfile(patch_file)
     patch_set.apply()
     atlas_path = ATLAS_PATH_TEMPLATE.format(repo_path=BUILD_STUFF,
                                           n_bits=n_bits)
