@@ -7,6 +7,8 @@ from os.path import abspath, dirname, join as pjoin
 import shutil
 from subprocess import check_call
 
+import patch
+
 BUILD_STUFF = abspath(dirname(__file__))
 
 LIB_NAME = 'numpy-atlas'
@@ -33,7 +35,8 @@ def main():
     check_call(['git', 'clean', '-fxd'])
     check_call(['git', 'reset', '--hard'])
     patch_file = pjoin(BUILD_STUFF, '1.10.4-init.patch')
-    check_call(['git', 'apply', '--ignore-whitespace', patch_file])
+    patch_set = patch.from_file(patch_file)
+    patch_set.apply()
     atlas_path = ATLAS_PATH_TEMPLATE.format(repo_path=BUILD_STUFF,
                                           n_bits=n_bits)
     with open('site.cfg', 'wt') as fobj:
