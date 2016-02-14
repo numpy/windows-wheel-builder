@@ -7,7 +7,10 @@ from os.path import abspath, dirname, join as pjoin
 import shutil
 from subprocess import check_call
 from platform import architecture
+from glob import glob
+from zipfile import ZipFile
 
+from delocate import wheeltools
 import patch
 
 BUILD_STUFF = abspath(dirname(__file__))
@@ -24,10 +27,27 @@ lapack_libs = {lib_name}
 
 ATLAS_PATH_TEMPLATE = r'{repo_path}\atlas-builds\atlas-3.10.1-sse2-{n_bits}'
 
+def my_zip2dir(zip_fname, out_dir):
+    with open(zip_fname, 'rb') as fobj:
+        zip = ZipFile(fobj)
+        zip.extractall(path=out_dir)
+
+
+# Monkeypatch wheeltools
+wheeltools.zip2dir = my_zip2dir
+
 
 def get_bitness():
     bits, _ = architecture()
     return '32' if bits == '32bit' else '64' if bits == '64bit' else None
+
+
+def add_library(lib_path, dist_path='dist'):
+    wheel_fnames = glob(pjoin(dist_path, '*.whl'))
+    for fname in wheel_fnames:
+        print('Processing', fname)
+        with wheeltools.InWheel(fname, fname):
+            shutil.copy2(lib_path, pjoin('numpy', 'core'))
 
 
 def main():
@@ -49,8 +69,7 @@ def main():
                                             lib_name=LIB_NAME))
     shutil.copy2(pjoin(BUILD_STUFF, '_distributor_init.py'), 'numpy')
     check_call(['python', 'setup.py', 'bdist_wheel'])
-    check_call(['python',  pjoin(BUILD_STUFF, 'add_library.py'),
-                atlas_path + r'\\lib\\' + LIB_NAME + '.dll'])
+    add_library(atlas_path + r'\\lib\\' + LIB_NAME + '.dll')
 
 
 if __name__ == '__main__':
