@@ -14,6 +14,8 @@ from delocate import wheeltools
 import patch
 
 BUILD_STUFF = abspath(dirname(__file__))
+ATLAS_VERSIONS = {'32': '3.10.1',
+		  '64': '3.11.38'}
 
 LIB_NAME = 'numpy-atlas'
 
@@ -25,7 +27,7 @@ atlas_libs = {lib_name}
 lapack_libs = {lib_name}
 """
 
-ATLAS_PATH_TEMPLATE = r'{repo_path}\atlas-builds\atlas-3.10.1-sse2-{n_bits}'
+ATLAS_PATH_TEMPLATE = r'{repo_path}\atlas-builds\atlas-{atlas_ver}-sse2-{n_bits}'
 
 def my_zip2dir(zip_fname, out_dir):
     with open(zip_fname, 'rb') as fobj:
@@ -62,8 +64,10 @@ def main():
     patch_file = pjoin(BUILD_STUFF, '1.10.4-init.patch')
     patch_set = patch.fromfile(patch_file)
     patch_set.apply()
-    atlas_path = ATLAS_PATH_TEMPLATE.format(repo_path=BUILD_STUFF,
-                                          n_bits=n_bits)
+    atlas_path = ATLAS_PATH_TEMPLATE.format(
+		    repo_path=BUILD_STUFF,
+		    atlas_ver=ATLAS_VERSIONS[n_bits],
+		    n_bits=n_bits)
     with open('site.cfg', 'wt') as fobj:
         fobj.write(SITE_CFG_TEMPLATE.format(atlas_path=atlas_path,
                                             lib_name=LIB_NAME))
