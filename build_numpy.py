@@ -65,9 +65,9 @@ def main():
     patch_set = patch.fromfile(patch_file)
     patch_set.apply()
     atlas_path = ATLAS_PATH_TEMPLATE.format(
-		    repo_path=BUILD_STUFF,
-		    atlas_ver=ATLAS_VERSIONS[n_bits],
-		    n_bits=n_bits)
+        repo_path=BUILD_STUFF,
+        atlas_ver=ATLAS_VERSIONS[n_bits],
+        n_bits=n_bits)
     with open('site.cfg', 'wt') as fobj:
         fobj.write(SITE_CFG_TEMPLATE.format(atlas_path=atlas_path,
                                             lib_name=LIB_NAME))
