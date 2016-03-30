@@ -11,7 +11,7 @@ environment:
       WHEELHOUSE_UPLOADER_USERNAME: matthew.brett
       WHEELHOUSE_UPLOADER_SECRET:
         secure:
-            wSarKWZqmNbc3fTkBlUtt1h4zPxjqy4/Brv0df/guuOsce47ojjISbFph1LMPT0b
+            sb0P1lcBU2GniiKb5m1mpg6kGwWOEC9DtWRqg00+BH/ATYadhCqrpmKUdHJhPTwJ
 
     matrix:
 
