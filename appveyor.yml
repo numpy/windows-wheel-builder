@@ -8,7 +8,7 @@ os: Visual Studio 2015
 environment:
     global:
       NP_VERSION: v1.11.0
-      WHEELHOUSE_UPLOADER_USERNAME: travis.worker
+      WHEELHOUSE_UPLOADER_USERNAME: travis-worker
       WHEELHOUSE_UPLOADER_SECRET:
         secure:
             sb0P1lcBU2GniiKb5m1mpg6kGwWOEC9DtWRqg00+BH/ATYadhCqrpmKUdHJhPTwJ
