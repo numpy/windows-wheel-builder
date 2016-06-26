@@ -7,7 +7,7 @@ os: Visual Studio 2015
 
 environment:
     global:
-      NP_VERSION: v1.11.1rc1
+      NP_VERSION: v1.11.1
       WHEELHOUSE_UPLOADER_USERNAME: travis-worker
       WHEELHOUSE_UPLOADER_SECRET:
         secure:
