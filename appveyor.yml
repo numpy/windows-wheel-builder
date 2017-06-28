@@ -61,7 +61,7 @@ install:
   # Download built openblas libraries
   - PATH=%PATH%;c:\msys64\usr\bin
   - set OUR_WD=%cd%
-  - set OPENBLAS_FNAME=openblas_%OPENBLAS_COMMIT%_win%PYTHON_ARCH%.tar.gz
+  - set OPENBLAS_FNAME=openblas-%OPENBLAS_COMMIT%_win%PYTHON_ARCH%.tar.gz
   - curl -LO %RACK_URL%/%OPENBLAS_FNAME%
   - cmd /c "cd %OPENBLAS_ROOT% & tar zxvf %OUR_WD%\%OPENBLAS_FNAME%"
 
