@@ -1,8 +1,10 @@
 """ Build numpy wheels
 """
+from __future__ import print_function, absolute_import
 
 import sys
 import os
+import re
 from os.path import abspath, dirname, join as pjoin
 import shutil
 from subprocess import check_call
@@ -11,25 +13,15 @@ from glob import glob
 from zipfile import ZipFile
 
 from delocate import wheeltools
-import patch
 
 BUILD_STUFF = abspath(dirname(__file__))
-ATLAS_VERSIONS = {'32': '3.10.1',
-		  '64': '3.11.38'}
+DEFAULT_OPENBLAS_ROOT = r"c:\opt"
+OPENBLAS_LIBNAME_RE = re.compile(r'^libraries\s*=\s*(.+)$', re.M)
 
-LIB_NAME = 'numpy-atlas'
-
-SITE_CFG_TEMPLATE = r"""
-[atlas]
-include_dirs = {atlas_path}\include
-library_dirs = {atlas_path}\lib
-atlas_libs = {lib_name}
-lapack_libs = {lib_name}
-"""
-
-ATLAS_PATH_TEMPLATE = r'{repo_path}\atlas-builds\atlas-{atlas_ver}-sse2-{n_bits}'
 
 def my_zip2dir(zip_fname, out_dir):
+    """ Removes need for 'unzip' binary in PATH during `wheeltools.zip2dir`
+    """
     with open(zip_fname, 'rb') as fobj:
         zip = ZipFile(fobj)
         zip.extractall(path=out_dir)
@@ -54,26 +46,24 @@ def add_library(lib_path, dist_path='dist'):
 
 def main():
     argc = len(sys.argv)
-    numpy_path = sys.argv[1] if argc > 1 else os.getcwd()
+    numpy_path = abspath(sys.argv[1] if argc > 1 else os.getcwd())
     n_bits = sys.argv[2] if argc > 2 else get_bitness()
+    openblas_root = abspath(sys.argv[3] if argc > 3 else DEFAULT_OPENBLAS_ROOT)
     if n_bits not in ('32', '64'):
         raise RuntimeError("Number of bits should be 32 or 64")
-    os.chdir(abspath(numpy_path))
+    os.chdir(numpy_path)
     check_call(['git', 'clean', '-fxd'])
     check_call(['git', 'reset', '--hard'])
-    patch_file = pjoin(BUILD_STUFF, '1.10.4-init.patch')
-    patch_set = patch.fromfile(patch_file)
-    patch_set.apply()
-    atlas_path = ATLAS_PATH_TEMPLATE.format(
-        repo_path=BUILD_STUFF,
-        atlas_ver=ATLAS_VERSIONS[n_bits],
-        n_bits=n_bits)
+    blas_dir = pjoin(openblas_root, str(n_bits))
+    with open(pjoin(blas_dir, 'site.cfg.template'), 'rt') as fobj:
+        cfg_template = fobj.read()
+    lib_basename = OPENBLAS_LIBNAME_RE.search(cfg_template).groups()[0]
     with open('site.cfg', 'wt') as fobj:
-        fobj.write(SITE_CFG_TEMPLATE.format(atlas_path=atlas_path,
-                                            lib_name=LIB_NAME))
+        fobj.write(cfg_template.format(openblas_root=openblas_root))
+    # Copy guard against importing without SSE2
     shutil.copy2(pjoin(BUILD_STUFF, '_distributor_init.py'), 'numpy')
     check_call(['python', 'setup.py', 'bdist_wheel'])
-    add_library(atlas_path + r'\\lib\\' + LIB_NAME + '.dll')
+    add_library(pjoin(blas_dir, 'bin', lib_basename + '.dll'))
 
 
 if __name__ == '__main__':

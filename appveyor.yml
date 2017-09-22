@@ -4,7 +4,9 @@ os: Visual Studio 2015
 
 environment:
     global:
-      NP_VERSION: v1.13.1
+      NUMPY_COMMIT: v1.13.1
+      OPENBLAS_COMMIT: v0.2.20
+      OPENBLAS_ROOT: c:\opt
       WHEELHOUSE_UPLOADER_USERNAME: travis-worker
       WHEELHOUSE_UPLOADER_SECRET:
         secure:
@@ -49,19 +51,23 @@ install:
   # Pin wheel to 0.26 to avoid Windows ABI tag for built wheel
   - pip install wheel==0.26
   - git clone https://github.com/numpy/numpy.git
+  # Download built openblas libraries
+  - cmd /c unpack_openblas.bat
 
 build_script:
   # Build and install the wheel
   - cd numpy
-  - git checkout %NP_VERSION%
-  - python ..\build_numpy.py
+  - git checkout %NUMPY_COMMIT%
+  - python ..\build_numpy.py . %PYTHON_ARCH% %OPENBLAS_ROOT%
   - cd dist
   - pip install --pre --no-index -f . numpy
   - pip install nose
+  # Delete the original libraries to check import of vendored libs
+  - rmdir /s /q %OPENBLAS_ROOT%\%PYTHON_ARCH%
 
 test_script:
   # Run the project tests
-  - python -c "import numpy; numpy.test()"
+  - python -c "import numpy; numpy.test(verbose=3)"
   - cd ..
 
 artifacts:
@@ -72,4 +78,5 @@ on_success:
   # On Windows, Apache Libcloud cannot find a standard CA cert bundle so we
   # disable the ssl checks.
   - pip install wheelhouse-uploader
-  - python -m wheelhouse_uploader upload --no-ssl-check --local-folder=dist win-atlas-wheels
+  - python -m wheelhouse_uploader upload --no-ssl-check --local-folder=dist
+    mingwpy-wheels
