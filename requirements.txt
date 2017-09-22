@@ -1,3 +1,4 @@
-cython<=0.23.4
+cython<=0.23.4; python_version < '3.6'
+cython; python_version >= '3.6'
 delocate
 patch
