@@ -2,7 +2,9 @@
 # Install only if:
 #    Our current matrix entry uses Python 3.6 AND
 #    Python 3.6.1 is the current Python 3.6
-if ("$(& $env:PYTHON\Python.exe --version)" -ne "Python 3.6.1") {
+
+$py_ver = "$(& ${env:PYTHON}\Python.exe --version 2> $null)"
+if ("$py_ver" -ne "Python 3.6.1") {
     exit 0
 }
 if ($env:PYTHON -eq "C:\Python36-x64") {
@@ -23,4 +25,4 @@ Write-Host "Installing..."
 cmd /c start /wait $exePath /quiet TargetDir="$env:PYTHON" Shortcuts=0 Include_launcher=0 InstallLauncherAllUsers=0
 Write-Host "Python 3.6.2 installed to $env:PYTHON"
 
-echo "$(& $env:PYTHON\Python.exe --version)"
+echo "$(& $env:PYTHON\Python.exe --version 2> $null)"
