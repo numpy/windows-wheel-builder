@@ -53,7 +53,6 @@ def main():
         raise RuntimeError("Number of bits should be 32 or 64")
     os.chdir(numpy_path)
     check_call(['git', 'clean', '-fxd'])
-    check_call(['git', 'reset', '--hard'])
     blas_dir = pjoin(openblas_root, str(n_bits))
     with open(pjoin(blas_dir, 'site.cfg.template'), 'rt') as fobj:
         cfg_template = fobj.read()
