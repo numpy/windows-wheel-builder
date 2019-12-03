@@ -2,11 +2,9 @@
 Numpy Windows wheel builder
 ###########################
 
+**No longer maintained. This is the wrong repo, do not use it.**
+
 Build numpy wheels with MSVC and pre-built ATLAS binaries.
-
-.. note::
-    No longer maintained. This is the wrong repo, do not use it.
-
 
 See ``appveyor.yml`` for the build process as applied on Appveyor.
 
